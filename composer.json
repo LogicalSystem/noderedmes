@@ -1,0 +1,16 @@
+{
+    "name": "logicalsystem/noderedmes",
+    "description": "Chiamate a nodered per il mes",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.1",
+        "logicalsystem/httpcalls": "dev-master"
+    },
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "LogicalSystem\\NodeRed\\": "src/"
+        }
+    }
+}
