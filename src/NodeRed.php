@@ -48,9 +48,10 @@ class NodeRed {
 
 
 
-    public function getOperatori($cod = NULL,$pin = NULL) {
+    public function getOperatori($cod = NULL,$pin = NULL,$id = NULL) {
         if(!is_null($cod)) $url = $this->baseUrl."/operatori/cod/".$cod;
         elseif(!is_null($pin)) $url = $this->baseUrl."/operatori/pin/".$pin;
+        elseif(!is_null($id)) $url = $this->baseUrl."/operatori/id/".$id;
         else $url = $this->baseUrl."/operatori";
         return HttpCalls::get($url);
     }
