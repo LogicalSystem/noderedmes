@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5ffd7cbc4ce191c990896c0b3472aaba",
+    "content-hash": "a8bcba5283e1114afd04d5ed2fc94556",
     "packages": [
         {
             "name": "logicalsystem/httpcalls",
-            "version": "dev-master",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LogicalSystem/httpcalls.git",
@@ -23,7 +23,6 @@
             "require": {
                 "php": ">=7.1"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -37,7 +36,7 @@
             "description": "Libreria curl",
             "support": {
                 "issues": "https://github.com/LogicalSystem/httpcalls/issues",
-                "source": "https://github.com/LogicalSystem/httpcalls/tree/master"
+                "source": "https://github.com/LogicalSystem/httpcalls/tree/v1.0.0"
             },
             "time": "2023-02-01T08:47:57+00:00"
         }
