@@ -73,7 +73,7 @@ class NodeRed {
 
     // fasi dell'ordine del lavoro, sulla macchina, che siano tra i task
     public function getFasiTask($odl, $cdl) {
-        $url = NodeRed::getUrlFasiTask().$odl."/cdl/".$cdl;
+        $url = $this->getUrlFasiTask().$odl."/cdl/".$cdl;
         return HttpCalls::get($url);
     }
 
