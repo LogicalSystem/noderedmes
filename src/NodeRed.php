@@ -724,6 +724,11 @@ class NodeRed {
         return HttpCalls::put($url,$data);
     }
 
+    public function putEventoData($data) {
+        $url = $this->baseUrl."/eventi-data";
+        return HttpCalls::put($url,$data);
+    }
+
 
 
 
