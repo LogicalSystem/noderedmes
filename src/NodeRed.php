@@ -482,6 +482,26 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
+    public function getProtocolliMisurazioni($id = NULL, $protocollo = NULL, $item = NULL) {
+        if(!is_null($id)) $url = $this->baseUrl."/protocolli-misurazioni/id/".$id;
+        elseif(!is_null($protocollo) && !is_null($item)) $url = $this->baseUrl."/protocolli-misurazioni/protocollo/".$protocollo."/item/".$item;
+        elseif(!is_null($protocollo)) $url = $this->baseUrl."/protocolli-misurazioni/protocollo/".$protocollo;
+        elseif(!is_null($item)) $url = $this->baseUrl."/protocolli-misurazioni/item/".$item;
+        else $url = $this->baseUrl."/protocolli-misurazioni";
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+    }
+
+    public function getCentriDiLavoroProtocolliMisurazioni($id = NULL, $codiceCdl = NULL, $protocollo = NULL, $item = NULL) {
+        if(!is_null($id)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/id/".$id;
+        elseif(!is_null($protocollo) && !is_null($item) && !is_null($codiceCdl)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/cdl/".$codiceCdl."/protocollo/".$protocollo."/item/".$item;
+        elseif(!is_null($codiceCdl) && !is_null($protocollo)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/cdl/".$protocollo."/protocollo/".$protocollo;
+        elseif(!is_null($protocollo)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/protocollo/".$protocollo;
+        elseif(!is_null($codiceCdl)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/cdl/".$codiceCdl;
+        elseif(!is_null($item)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/item/".$item;
+        else $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni";
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+    }
+
 
     
 
@@ -728,6 +748,16 @@ class NodeRed {
 
     public function putEventoData($data) {
         $url = $this->baseUrl."/eventi-data";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function putProtocolliMisurazioni($data) {
+        $url = $this->baseUrl."/protocolli-misurazioni";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function putCentriDiLavoroProtocolliMisurazioni($data) {
+        $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni";
         return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
@@ -981,6 +1011,18 @@ class NodeRed {
     public function deleteSquadra($Codice) {
         $data = [ "CodiceSquadra" => $Codice ];
         $url = $this->baseUrl."/squadre";
+        return HttpCalls::delete($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function deleteProtocolliMisurazioni($id) {
+        $data = [ "id" => $id ];
+        $url = $this->baseUrl."/protocolli-misurazioni";
+        return HttpCalls::delete($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function deleteCentriDiLavoroProtocolliMisurazioni($id) {
+        $data = [ "id" => $id ];
+        $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni";
         return HttpCalls::delete($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
