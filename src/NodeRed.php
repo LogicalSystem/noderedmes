@@ -482,11 +482,13 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
-    public function getProtocolliMisurazioni($id = NULL, $protocollo = NULL, $item = NULL) {
+    public function getProtocolliMisurazioni($id = NULL, $protocollo = NULL, $item = NULL, $endPoint = NULL) {
         if(!is_null($id)) $url = $this->baseUrl."/protocolli-misurazioni/id/".$id;
         elseif(!is_null($protocollo) && !is_null($item)) $url = $this->baseUrl."/protocolli-misurazioni/protocollo/".$protocollo."/item/".$item;
+        elseif(!is_null($protocollo) && !is_null($item) && !is_null($endPoint)) $url = $this->baseUrl."/protocolli-misurazioni/endpoint/".$endPoint."/protocollo/".$protocollo."/item/".$item;
         elseif(!is_null($protocollo)) $url = $this->baseUrl."/protocolli-misurazioni/protocollo/".$protocollo;
         elseif(!is_null($item)) $url = $this->baseUrl."/protocolli-misurazioni/item/".$item;
+        elseif(!is_null($endPoint)) $url = $this->baseUrl."/protocolli-misurazioni/endpoint/".$endPoint;
         else $url = $this->baseUrl."/protocolli-misurazioni";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
