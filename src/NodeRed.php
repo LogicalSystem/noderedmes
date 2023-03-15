@@ -491,14 +491,24 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
-    public function getCentriDiLavoroProtocolliMisurazioni($id = NULL, $codiceCdl = NULL, $protocollo = NULL, $item = NULL) {
+    public function getCentriDiLavoroProtocolliMisurazioni($id = NULL, $codiceCdl = NULL, $protocollo = NULL, $item = NULL, $protocolloId = NULL) {
         if(!is_null($id)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/id/".$id;
         elseif(!is_null($protocollo) && !is_null($item) && !is_null($codiceCdl)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/cdl/".$codiceCdl."/protocollo/".$protocollo."/item/".$item;
         elseif(!is_null($codiceCdl) && !is_null($protocollo)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/cdl/".$protocollo."/protocollo/".$protocollo;
         elseif(!is_null($protocollo)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/protocollo/".$protocollo;
         elseif(!is_null($codiceCdl)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/cdl/".$codiceCdl;
         elseif(!is_null($item)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/item/".$item;
+        elseif(!is_null($item)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/protocollo-id/".$protocolloId;
         else $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni";
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+    }
+
+    public function getMisurazioniUnita($id = NULL, $type = NULL, $name = NULL) {
+        if(!is_null($id)) $url = $this->baseUrl."/misurazioni-unita/id/".$id;
+        elseif(!is_null($type) && !is_null($name)) $url = $this->baseUrl."/misurazioni-unita/type/".$type."/name/".$name;
+        elseif(!is_null($type)) $url = $this->baseUrl."/misurazioni-unita/type/".$type;
+        elseif(!is_null($name)) $url = $this->baseUrl."/misurazioni-unita/name/".$name;
+        else $url = $this->baseUrl."/misurazioni-unita";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
