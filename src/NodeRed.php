@@ -498,7 +498,7 @@ class NodeRed {
         elseif(!is_null($protocollo)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/protocollo/".$protocollo;
         elseif(!is_null($codiceCdl)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/cdl/".$codiceCdl;
         elseif(!is_null($item)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/item/".$item;
-        elseif(!is_null($item)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/protocollo-id/".$protocolloId;
+        elseif(!is_null($protocolloId)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/protocollo-id/".$protocolloId;
         else $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
