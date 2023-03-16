@@ -157,10 +157,12 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
-    public function getTaskScarti($task = NULL, $cod = NULL) {
+    public function getTaskScarti($task = NULL, $cod = NULL, $runningTaskId = NULL) {
         if(!is_null($task) && !is_null($cod)) $url = $this->baseUrl."/task-scarti/task/".$task."/cod/".$cod;
+        elseif(!is_null($runningTaskId) && !is_null($cod)) $url = $this->baseUrl."/task-scarti/running-task/".$runningTaskId."/cod/".$cod;
         elseif(!is_null($task)) $url = $this->baseUrl."/task-scarti/task/".$task;
         elseif(!is_null($cod)) $url = $this->baseUrl."/task-scarti/cod/".$cod;
+        elseif(!is_null($runningTaskId)) $url = $this->baseUrl."/task-scarti/running-task/".$runningTaskId;
         else $url = $this->baseUrl."/task-scarti";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
