@@ -484,22 +484,20 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
-    public function getProtocolliMisurazioni($id = NULL, $protocollo = NULL, $item = NULL, $endPoint = NULL) {
+    public function getProtocolliMisurazioni($id = NULL, $protocollo = NULL, $item = NULL) {
         if(!is_null($id)) $url = $this->baseUrl."/protocolli-misurazioni/id/".$id;
-        elseif(!is_null($protocollo) && !is_null($item) && !is_null($endPoint)) $url = $this->baseUrl."/protocolli-misurazioni/endpoint/".$endPoint."/protocollo/".$protocollo."/item/".$item;
         elseif(!is_null($protocollo) && !is_null($item)) $url = $this->baseUrl."/protocolli-misurazioni/protocollo/".$protocollo."/item/".$item;
         elseif(!is_null($protocollo)) $url = $this->baseUrl."/protocolli-misurazioni/protocollo/".$protocollo;
         elseif(!is_null($item)) $url = $this->baseUrl."/protocolli-misurazioni/item/".$item;
-        elseif(!is_null($endPoint)) $url = $this->baseUrl."/protocolli-misurazioni/endpoint/".$endPoint;
         else $url = $this->baseUrl."/protocolli-misurazioni";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
-    public function getCentriDiLavoroProtocolliMisurazioni($id = NULL, $codiceCdl = NULL, $protocollo = NULL, $item = NULL, $protocolloId = NULL, $endPoint = NULL) {
+    public function getCentriDiLavoroProtocolliMisurazioni($id = NULL, $codiceCdl = NULL, $protocollo = NULL, $item = NULL, $protocolloId = NULL) {
         if(!is_null($id)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/id/".$id;
         elseif(!is_null($protocollo) && !is_null($item) && !is_null($codiceCdl)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/cdl/".$codiceCdl."/protocollo/".$protocollo."/item/".$item;
-        elseif(!is_null($protocollo) && !is_null($item) && !is_null($endPoint)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/endpoint/".$endPoint."/protocollo/".$protocollo."/item/".$item;
-        elseif(!is_null($codiceCdl) && !is_null($protocollo)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/cdl/".$protocollo."/protocollo/".$protocollo;
+        elseif(!is_null($codiceCdl) && !is_null($protocollo)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/cdl/".$codiceCdl."/protocollo/".$protocollo;
+        elseif(!is_null($codiceCdl) && !is_null($protocolloId)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/cdl/".$codiceCdl."/protocollo-id/".$protocolloId;
         elseif(!is_null($protocollo)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/protocollo/".$protocollo;
         elseif(!is_null($codiceCdl)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/cdl/".$codiceCdl;
         elseif(!is_null($item)) $url = $this->baseUrl."/centri-di-lavoro-protocolli-misurazioni/item/".$item;
