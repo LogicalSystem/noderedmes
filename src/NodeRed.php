@@ -525,6 +525,15 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
+    public function getLottiSeriali($id = NULL, $codiceOdl = NULL, $codiceFase = NULL) {
+        if(!is_null($id)) $url = $this->baseUrl."/lotti-seriali/id/".$id;
+        elseif(!is_null($codiceOdl) && !is_null($codiceFase)) $url = $this->baseUrl."/lotti-seriali/odl/".$codiceOdl."/fase/".$codiceFase;
+        elseif(!is_null($codiceOdl)) $url = $this->baseUrl."/lotti-seriali/odl/".$codiceOdl;
+        elseif(!is_null($codiceFase)) $url = $this->baseUrl."/lotti-seriali/fase/".$codiceFase;
+        else $url = $this->baseUrl."/lotti-seriali";
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+    }
+
 
     
 
