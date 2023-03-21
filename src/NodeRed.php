@@ -515,6 +515,15 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
+    public function getStoricoMisurazioni($id = NULL, $startDate = NULL, $protocollo = NULL, $item = NULL, $ultimo = NULL) {
+        if(!is_null($id)) $url = $this->baseUrl."/storico-misurazioni/id/".$id;
+        elseif(!is_null($ultimo) && !is_null($item) && !is_null($protocollo)) $url = $this->baseUrl."/storico-misurazioni/ultimo/protocollo/".$protocollo."/item/".$item;
+        elseif(!is_null($startDate)) $url = $this->baseUrl."/storico-misurazioni/startdate/".$startDate;
+        elseif(!is_null($ultimo)) $url = $this->baseUrl."/storico-misurazioni/ultimo";
+        else $url = $this->baseUrl."/storico-misurazioni";
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+    }
+
 
     
 
