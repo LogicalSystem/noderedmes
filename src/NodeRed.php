@@ -604,6 +604,16 @@ class NodeRed
         return HttpCalls::get($url, ["Authorization: " . $this->authToken]);
     }
 
+    public function getStoricoMisurazioniBuffer($id = NULL, $startDate = NULL, $protocollo = NULL, $item = NULL, $ultimo = NULL, $endPoint = NULL) {
+        if(!is_null($id)) $url = $this->baseUrl."/storico-misurazioni-buffer/id/".$id;
+        elseif(!is_null($ultimo) && !is_null($item) && !is_null($protocollo) && !is_null($endPoint)) $url = $this->baseUrl."/storico-misurazioni-buffer/ultimo/protocollo/".$protocollo."/item/".$item."/endpoint/".$endPoint;
+        elseif(!is_null($ultimo) && !is_null($item) && !is_null($protocollo)) $url = $this->baseUrl."/storico-misurazioni-buffer/ultimo/protocollo/".$protocollo."/item/".$item;
+        elseif(!is_null($startDate)) $url = $this->baseUrl."/storico-misurazioni-buffer/startdate/".$startDate;
+        elseif(!is_null($ultimo)) $url = $this->baseUrl."/storico-misurazioni-buffer/ultimo";
+        else $url = $this->baseUrl."/storico-misurazioni-buffer";
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+    }
+
 
 
 
