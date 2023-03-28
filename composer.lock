@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "logicalsystem/httpcalls",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LogicalSystem/httpcalls.git",
-                "reference": "38104a6712cc17027a98b02fc3fdc15019d6d9db"
+                "reference": "11d961d340122bf0003cd0a31f99fb51ae7e7bc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LogicalSystem/httpcalls/zipball/38104a6712cc17027a98b02fc3fdc15019d6d9db",
-                "reference": "38104a6712cc17027a98b02fc3fdc15019d6d9db",
+                "url": "https://api.github.com/repos/LogicalSystem/httpcalls/zipball/11d961d340122bf0003cd0a31f99fb51ae7e7bc9",
+                "reference": "11d961d340122bf0003cd0a31f99fb51ae7e7bc9",
                 "shasum": ""
             },
             "require": {
@@ -36,9 +36,9 @@
             "description": "Libreria curl",
             "support": {
                 "issues": "https://github.com/LogicalSystem/httpcalls/issues",
-                "source": "https://github.com/LogicalSystem/httpcalls/tree/v1.1.0"
+                "source": "https://github.com/LogicalSystem/httpcalls/tree/v1.1.1"
             },
-            "time": "2023-03-28T13:02:45+00:00"
+            "time": "2023-03-28T13:55:58+00:00"
         }
     ],
     "packages-dev": [],
