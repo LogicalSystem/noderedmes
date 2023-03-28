@@ -4,7 +4,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=7.1",
-        "logicalsystem/httpcalls": "1.*"
+        "logicalsystem/httpcalls": "dev-master"
     },
     "type": "library",
     "license": "MIT",
