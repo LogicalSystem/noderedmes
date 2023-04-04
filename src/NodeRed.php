@@ -1103,6 +1103,13 @@ class NodeRed {
         return HttpCalls::delete($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
+    public function deleteStoricoMisurazioniBufferItem($protocol,$item,$endpoint)
+    {
+        $data = ["protocol" => $protocol,"item" => $item,"endpoint" => $endpoint];
+        $url = $this->baseUrl . "/storico-misurazioni-buffer-item";
+        return HttpCalls::delete($url, $data, "application/json", ["Authorization: " . $this->authToken]);
+    }
+
 
     
 
