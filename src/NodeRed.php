@@ -143,6 +143,7 @@ class NodeRed {
         elseif(!is_null($task) && !is_null($startDate)) $url = $this->baseUrl."/eventi/task/".$task."/startdate/".$startDate;
         elseif(!is_null($cdl) && !is_null($startDate)) $url = $this->baseUrl."/eventi/cdl/".$cdl."/startdate/".$startDate;
         elseif(!is_null($task)) $url = $this->baseUrl."/eventi/task/".$task;
+        elseif(!is_null($runningTaskId) && !is_null($evento)) $url = $this->baseUrl."/eventi/running-task/".$runningTaskId."/evento/".$evento;
         elseif(!is_null($runningTaskId)) $url = $this->baseUrl."/eventi/running-task/".$runningTaskId;
         elseif(!is_null($evento)) $url = $this->baseUrl."/eventi/evento/".$evento;
         elseif(!is_null($cdl)) $url = $this->baseUrl."/eventi/cdl/".$cdl;
