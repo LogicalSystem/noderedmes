@@ -164,7 +164,7 @@ class NodeRed {
     public function getStoricoEventi($cdl = NULL, $taskId = NULL, $codiceOdl = NULL) {
         if(!is_null($cdl)) $url = $this->baseUrl."/storico-eventi/cdl/".$cdl;
         elseif(!is_null($taskId)) $url = $this->baseUrl."/storico-eventi/task/".$taskId;
-        elseif(!is_null($taskId)) $url = $this->baseUrl."/storico-eventi/odl/".$codiceOdl;
+        elseif(!is_null($codiceOdl)) $url = $this->baseUrl."/storico-eventi/odl/".$codiceOdl;
         else $url = $this->baseUrl."/storico-eventi";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
