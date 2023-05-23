@@ -75,9 +75,10 @@ class NodeRed {
     }
 
 
-    public function getFasi($task = NULL, $cod = NULL) {
+    public function getFasi($task = NULL, $cod = NULL, $codiceOdl = NULL) {
         if(!is_null($task)) $url = $this->baseUrl."/fasi/task/".$task;
         elseif(!is_null($cod)) $url = $this->baseUrl."/fasi/cod/".$cod;
+        elseif(!is_null($codiceOdl)) $url = $this->baseUrl."/fasi/odl/".$codiceOdl;
         else $url = $this->baseUrl."/fasi";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
