@@ -524,11 +524,12 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
-    public function getMisurazioniUnita($id = NULL, $type = NULL, $name = NULL) {
+    public function getMisurazioniUnita($id = NULL, $type = NULL, $name = NULL, $code = NULL) {
         if(!is_null($id)) $url = $this->baseUrl."/misurazioni-unita/id/".$id;
         elseif(!is_null($type) && !is_null($name)) $url = $this->baseUrl."/misurazioni-unita/type/".$type."/name/".$name;
         elseif(!is_null($type)) $url = $this->baseUrl."/misurazioni-unita/type/".$type;
         elseif(!is_null($name)) $url = $this->baseUrl."/misurazioni-unita/name/".$name;
+        elseif(!is_null($code)) $url = $this->baseUrl."/misurazioni-unita/code/".$code;
         else $url = $this->baseUrl."/misurazioni-unita";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
