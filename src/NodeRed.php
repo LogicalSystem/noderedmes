@@ -578,6 +578,15 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
+    public function getChat($id = NULL, $ip = NULL, $mittente = NULL, $codiceOperatore = NULL) {
+        if(!is_null($id)) $url = $this->baseUrl."/chat/id/".$id;
+        elseif(!is_null($ip)) $url = $this->baseUrl."/chat/ip/".$ip;
+        elseif(!is_null($mittente)) $url = $this->baseUrl."/chat/mittente/".$mittente;
+        elseif(!is_null($codiceOperatore)) $url = $this->baseUrl."/chat/operatore/".$codiceOperatore;
+        else $url = $this->baseUrl."/chat";
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+    }
+
 
     
 
@@ -837,6 +846,12 @@ class NodeRed {
         return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
+    public function putChatLettura($id) {
+        $url = $this->baseUrl."/chat-lettura";
+        $data = ["id" => $id];
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
 
 
 
@@ -944,6 +959,11 @@ class NodeRed {
 
     public function postSquadre($data) {
         $url = $this->baseUrl."/squadre";
+        return HttpCalls::post($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function postChat($data) {
+        $url = $this->baseUrl."/chat";
         return HttpCalls::post($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
