@@ -852,6 +852,15 @@ class NodeRed {
         return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
+    /**
+     * @param string $statoMarcatempo "dentro" o "fuori"
+     */
+    public function putOperatoreStatoMarcatempo($codiceOperatore,$statoMarcatempo) {
+        $url = $this->baseUrl."/operatore-stato-marcatempo";
+        $data = ["CodiceOperatore" => $codiceOperatore,"StatoMarcatempo" => $statoMarcatempo];
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
 
 
 
