@@ -1151,6 +1151,13 @@ class NodeRed {
         return HttpCalls::delete($url, $data, "application/json", ["Authorization: " . $this->authToken]);
     }
 
+    public function deleteTask($codiceOdl,$codiceFase)
+    {
+        $data = ["CodiceOdl" => $codiceOdl, "CodiceFase" => $codiceFase];
+        $url = $this->baseUrl . "/task";
+        return HttpCalls::delete($url, $data, "application/json", ["Authorization: " . $this->authToken]);
+    }
+
 
     
 
