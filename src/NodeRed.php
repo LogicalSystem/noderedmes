@@ -110,12 +110,13 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
-    public function getRunningTask($task = NULL, $cdl = NULL, $id = NULL, $codiceOdl = NULL) {
+    public function getRunningTask($task = NULL, $cdl = NULL, $id = NULL, $codiceOdl = NULL, $codiceOperatore = NULL) {
         if(!is_null($task) && !is_null($cdl)) $url = $this->baseUrl."/running-task/task/".$task."/cdl/".$cdl;
         elseif(!is_null($cdl)) $url = $this->baseUrl."/running-task/cdl/".$cdl;
         elseif(!is_null($task)) $url = $this->baseUrl."/running-task/task/".$task;
         elseif(!is_null($id)) $url = $this->baseUrl."/running-task/id/".$id;
         elseif(!is_null($codiceOdl)) $url = $this->baseUrl."/running-task/odl/".$codiceOdl;
+        elseif(!is_null($codiceOperatore)) $url = $this->baseUrl."/running-task/operatore/".$codiceOperatore;
         else $url = $this->baseUrl."/running-task";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
