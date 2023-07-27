@@ -757,6 +757,11 @@ class NodeRed {
         return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
+    public function putRunningTaskContapezziIniziale($data) {
+        $url = $this->baseUrl."/running-task-contapezzi-iniziale";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
     public function putWebhook($data) {
         $url = $this->baseUrl."/webhook";
         return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
@@ -859,6 +864,11 @@ class NodeRed {
     public function putOperatoreStatoMarcatempo($codiceOperatore,$statoMarcatempo) {
         $url = $this->baseUrl."/operatore-stato-marcatempo";
         $data = ["CodiceOperatore" => $codiceOperatore,"StatoMarcatempo" => $statoMarcatempo];
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function putCentroDiLavoroContapezziAutomatico($data) {
+        $url = $this->baseUrl."/centri-di-lavoro-contapezzi-automatico";
         return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
@@ -1142,6 +1152,13 @@ class NodeRed {
     {
         $data = ["protocol" => $protocol,"item" => $item,"endpoint" => $endpoint];
         $url = $this->baseUrl . "/storico-misurazioni-buffer-item";
+        return HttpCalls::delete($url, $data, "application/json", ["Authorization: " . $this->authToken]);
+    }
+
+    public function deleteStoricoMisurazioniBufferItemIso($protocol,$item,$endpoint,$dateIso)
+    {
+        $data = ["protocol" => $protocol,"item" => $item,"endpoint" => $endpoint, "dateIso" => $dateIso];
+        $url = $this->baseUrl . "/storico-misurazioni-buffer-item-date-iso";
         return HttpCalls::delete($url, $data, "application/json", ["Authorization: " . $this->authToken]);
     }
 
