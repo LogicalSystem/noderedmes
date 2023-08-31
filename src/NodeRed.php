@@ -110,6 +110,19 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
+
+    public function getTaskRaw($id = NULL, $odl = NULL, $cdl = NULL, $parentTask = NULL, $fase = NULL, $codiceOperatore = NULL) {
+        if(!is_null($id)) $url = $this->baseUrl."/task-raw/id/".$id;
+        elseif(!is_null($odl) && !is_null($fase)) $url = $this->baseUrl."/task-raw/odl/".$odl."/fase/".$fase;
+        elseif(!is_null($odl) && !is_null($cdl)) $url = $this->baseUrl."/task-raw/odl/".$odl."/cdl/".$cdl;
+        elseif(!is_null($cdl)) $url = $this->baseUrl."/task-raw/cdl/".$cdl;
+        elseif(!is_null($odl)) $url = $this->baseUrl."/task-raw/odl/".$odl;
+        elseif(!is_null($parentTask)) $url = $this->baseUrl."/task-raw/parent/".$parentTask;
+        elseif(!is_null($codiceOperatore)) $url = $this->baseUrl."/task-raw/op/".$codiceOperatore;
+        else $url = $this->baseUrl."/task-raw";
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+    }
+
     public function getRunningTask($task = NULL, $cdl = NULL, $id = NULL, $codiceOdl = NULL, $codiceOperatore = NULL) {
         if(!is_null($task) && !is_null($cdl)) $url = $this->baseUrl."/running-task/task/".$task."/cdl/".$cdl;
         elseif(!is_null($cdl)) $url = $this->baseUrl."/running-task/cdl/".$cdl;
@@ -266,6 +279,11 @@ class NodeRed {
 
     public function getTaskToDo($cdl, $ntask = 5) {
         $url = $this->baseUrl."/task-to-do/cdl/".$cdl."/ntask/".$ntask;
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+    }
+
+    public function getTaskToDoRaw($cdl, $ntask = 5) {
+        $url = $this->baseUrl."/task-to-do-raw/cdl/".$cdl."/ntask/".$ntask;
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
