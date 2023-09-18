@@ -606,6 +606,22 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
+    public function getArtefatti($id = NULL, $runningTaskId = NULL, $taskId = NULL, $codiceOdl = NULL, $codiceFase = NULL, $codiceCdl = NULL, $codiceOperatore = NULL, $lotto = NULL, $seriale = NULL) {
+        if(!is_null($id)) $url = $this->baseUrl."/artefatti/id/".$id;
+        elseif(!is_null($runningTaskId)) $url = $this->baseUrl."/artefatti/running-task/".$runningTaskId;
+        elseif(!is_null($taskId)) $url = $this->baseUrl."/artefatti/task/".$taskId;
+        elseif(!is_null($codiceOdl) && !is_null($codiceFase)) $url = $this->baseUrl."/artefatti/odl/".$codiceOdl."/fase/".$codiceFase;
+        elseif(!is_null($codiceOdl) && !is_null($codiceCdl)) $url = $this->baseUrl."/artefatti/odl/".$codiceOdl."/cdl/".$codiceCdl;
+        elseif(!is_null($codiceOdl)) $url = $this->baseUrl."/artefatti/odl/".$codiceOdl;
+        elseif(!is_null($codiceFase)) $url = $this->baseUrl."/artefatti/fase/".$codiceFase;
+        elseif(!is_null($codiceCdl)) $url = $this->baseUrl."/artefatti/cdl/".$codiceCdl;
+        elseif(!is_null($codiceOperatore)) $url = $this->baseUrl."/artefatti/op/".$codiceOperatore;
+        elseif(!is_null($lotto)) $url = $this->baseUrl."/artefatti/lotto/".$lotto;
+        elseif(!is_null($seriale)) $url = $this->baseUrl."/artefatti/seriale/".$seriale;
+        else $url = $this->baseUrl."/artefatti";
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+    }
+
 
     
 
@@ -965,6 +981,11 @@ class NodeRed {
         return HttpCalls::post($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
+    public function postWebhookHistory($data) {
+        $url = $this->baseUrl."/webhook-history";
+        return HttpCalls::post($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
     public function postCentroDiLavoroStat($data) {
         $url = $this->baseUrl."/centri-di-lavoro-stato";
         return HttpCalls::post($url,$data,"application/json",["Authorization: ".$this->authToken]);
@@ -1003,6 +1024,11 @@ class NodeRed {
     public function postChat($data) {
         $url = $this->baseUrl."/chat";
         return HttpCalls::post($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function postArtefatti($data) {
+        $url = $this->baseUrl."/artefatti";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
 
