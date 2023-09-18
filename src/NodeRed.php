@@ -1028,7 +1028,7 @@ class NodeRed {
 
     public function postArtefatti($data) {
         $url = $this->baseUrl."/artefatti";
-        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+        return HttpCalls::post($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
 
