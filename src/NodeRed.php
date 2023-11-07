@@ -622,6 +622,21 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
+    public function getEtichetteStampate($id = NULL,$runningTaskId = NULL) {
+        if(!is_null($id)) $url = $this->baseUrl."/etichette-stampate/id/".$id;
+        elseif(!is_null($runningTaskId)) $url = $this->baseUrl."/etichette-stampate/running-task/".$runningTaskId;
+        else $url = $this->baseUrl."/etichette-stampate";
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+    }
+
+    public function getTaskNoteErp($codiceOdl = NULL, $codiceFase = NULL) {
+        if(!is_null($codiceOdl) && !is_null($codiceFase)) $url = $this->baseUrl."/task-note-erp/odl/".$codiceOdl."/fase/".$codiceFase;
+        elseif(!is_null($codiceOdl)) $url = $this->baseUrl."/task-note-erp/odl/".$codiceOdl;
+        elseif(!is_null($codiceFase)) $url = $this->baseUrl."/task-note-erp/fase/".$codiceFase;
+        else $url = $this->baseUrl."/task-note-erp";
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+    }
+
 
     
 
@@ -906,6 +921,16 @@ class NodeRed {
         return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
+    public function putEtichetteStampatePassatoErp($data) {
+        $url = $this->baseUrl."/etichette-stampate-passato-erp";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function putEtichetteStampateLettoErp($data) {
+        $url = $this->baseUrl."/etichette-stampate-letto-erp";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
 
 
 
@@ -1028,6 +1053,11 @@ class NodeRed {
 
     public function postArtefatti($data) {
         $url = $this->baseUrl."/artefatti";
+        return HttpCalls::post($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+    
+    public function postEtichetteStampate($data) {
+        $url = $this->baseUrl."/etichette-stampate";
         return HttpCalls::post($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
