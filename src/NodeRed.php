@@ -637,6 +637,13 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
+    public function getNesting($id = NULL, $codiceNesting = NULL) {
+        if(is_null($id)) $url = $this->baseUrl."/nesting/".$id;
+        elseif(is_null($codiceNesting)) $url = $this->baseUrl."/nesting/codice/".$codiceNesting;
+        else $url = $this->baseUrl."/nesting";
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+    }
+
 
     
 
@@ -928,6 +935,11 @@ class NodeRed {
 
     public function putEtichetteStampateLettoErp($data) {
         $url = $this->baseUrl."/etichette-stampate-letto-erp";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function putCompletaTask($data) {
+        $url = $this->baseUrl."/task-completato";
         return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
