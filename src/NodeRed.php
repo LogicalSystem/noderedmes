@@ -211,8 +211,9 @@ class NodeRed {
     }
 
     public function getLotti($codl = NULL, $codm = NULL) {
-        if(!is_null($codl)) $url = $this->baseUrl."/lotti/codice-lotto/".$codl;
-        elseif(!is_null($codm)) $url = $this->baseUrl."/lotti/codice-materiale/".$codm;
+        if(!is_null($codl) && !is_null($codm)) $url = $this->baseUrl."/lotti/codice-lotto/".$codl."/codice-materiale/".urlencode($codm);
+        elseif(!is_null($codl)) $url = $this->baseUrl."/lotti/codice-lotto/".$codl;
+        elseif(!is_null($codm)) $url = $this->baseUrl."/lotti/codice-materiale/".urlencode($codm);
         else $url = $this->baseUrl."/lotti";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
