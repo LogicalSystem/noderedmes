@@ -201,7 +201,7 @@ class NodeRed {
     }
 
     public function getDistintaBase($codart = NULL, $odl = NULL, $id = NULL, $mat = NULL, $alt = "false", $codiceFase = NULL) {
-        if(!is_null($mat) && !is_null($odl)) $url = $this->baseUrl."/distinta-base/mat/".$mat."/odl/".$odl;
+        if(!is_null($mat) && !is_null($odl)) $url = $this->baseUrl."/distinta-base/mat/".urlencode($mat)."/odl/".$odl;
         elseif(!is_null($codiceFase) && !is_null($odl)) $url = $this->baseUrl."/distinta-base/odl/".$odl."/fase/".$codiceFase;
         elseif(!is_null($codart)) $url = $this->baseUrl."/distinta-base/cod/".$codart."/alt/".$alt;
         elseif(!is_null($odl)) $url = $this->baseUrl."/distinta-base/odl/".$odl."/alt/".$alt;
