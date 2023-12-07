@@ -949,7 +949,7 @@ class NodeRed {
     {
         $data = ["Id" => $id, "Letto" => $letto];
         $url = $this->baseUrl . "/task-note-erp-letto";
-        return HttpCalls::delete($url, $data, "application/json", ["Authorization: " . $this->authToken]);
+        return HttpCalls::put($url, $data, "application/json", ["Authorization: " . $this->authToken]);
     }
 
 
