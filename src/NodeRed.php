@@ -630,8 +630,9 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
-    public function getTaskNoteErp($codiceOdl = NULL, $codiceFase = NULL) {
+    public function getTaskNoteErp($codiceOdl = NULL, $codiceFase = NULL, $codiceArticolo = NULL, $codiceFaseExtra = NULL) {
         if(!is_null($codiceOdl) && !is_null($codiceFase)) $url = $this->baseUrl."/task-note-erp/odl/".$codiceOdl."/fase/".$codiceFase;
+        elseif(!is_null($codiceArticolo) && !is_null($codiceFaseExtra)) $url = $this->baseUrl."/task-note-erp/articolo/".$codiceArticolo."/fase-extra/".$codiceFaseExtra;
         elseif(!is_null($codiceOdl)) $url = $this->baseUrl."/task-note-erp/odl/".$codiceOdl;
         elseif(!is_null($codiceFase)) $url = $this->baseUrl."/task-note-erp/fase/".$codiceFase;
         else $url = $this->baseUrl."/task-note-erp";
@@ -942,6 +943,13 @@ class NodeRed {
     public function putCompletaTask($data) {
         $url = $this->baseUrl."/task-completato";
         return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function putTaskNoteErpLetto($id,$letto)
+    {
+        $data = ["Id" => $id, "Letto" => $letto];
+        $url = $this->baseUrl . "/task-note-erp-letto";
+        return HttpCalls::delete($url, $data, "application/json", ["Authorization: " . $this->authToken]);
     }
 
 
