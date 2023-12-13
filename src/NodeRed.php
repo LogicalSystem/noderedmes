@@ -952,6 +952,13 @@ class NodeRed {
         return HttpCalls::put($url, $data, "application/json", ["Authorization: " . $this->authToken]);
     }
 
+    public function putTaskNoteErpOperatoriLettura($id,$operatori)
+    {
+        $data = ["Id" => $id, "OperatoriLettura" => $operatori];
+        $url = $this->baseUrl . "/task-note-erp-operatori-lettura";
+        return HttpCalls::put($url, $data, "application/json", ["Authorization: " . $this->authToken]);
+    }
+
 
 
 
@@ -1269,6 +1276,12 @@ class NodeRed {
         $data = ["CodiceOdl" => $codiceOdl, "CodiceFase" => $codiceFase];
         $url = $this->baseUrl . "/task";
         return HttpCalls::delete($url, $data, "application/json", ["Authorization: " . $this->authToken]);
+    }
+
+    public function deleteTaskNoteErp($id) {
+        $data = [ "Id" => $id ];
+        $url = $this->baseUrl."/task-note-erp";
+        return HttpCalls::delete($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
 
