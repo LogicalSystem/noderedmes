@@ -2,7 +2,6 @@
 
 namespace LogicalSystem\NodeRed;
 
-use app\lib\Utility;
 use LogicalSystem\HttpCalls\HttpCalls;
 
 class NodeRed {
@@ -640,8 +639,8 @@ class NodeRed {
     }
 
     public function getNesting($id = NULL, $codiceNesting = NULL) {
-        if(is_null($id)) $url = $this->baseUrl."/nesting/".$id;
-        elseif(is_null($codiceNesting)) $url = $this->baseUrl."/nesting/codice/".$codiceNesting;
+        if(!is_null($id)) $url = $this->baseUrl."/nesting/".$id;
+        elseif(!is_null($codiceNesting)) $url = $this->baseUrl."/nesting/codice/".$codiceNesting;
         else $url = $this->baseUrl."/nesting";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
