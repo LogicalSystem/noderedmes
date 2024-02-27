@@ -200,7 +200,8 @@ class NodeRed {
     }
 
     public function getDistintaBase($codart = NULL, $odl = NULL, $id = NULL, $mat = NULL, $alt = "false", $codiceFase = NULL) {
-        if(!is_null($mat) && !is_null($odl)) $url = $this->baseUrl."/distinta-base/mat/".urlencode($mat)."/odl/".$odl;
+        if(!is_null($mat) && !is_null($odl) && !is_null($codiceFase)) $url = $this->baseUrl."/distinta-base/mat/".urlencode($mat)."/odl/".$odl."/fase/".$codiceFase;
+        elseif(!is_null($mat) && !is_null($odl)) $url = $this->baseUrl."/distinta-base/mat/".urlencode($mat)."/odl/".$odl;
         elseif(!is_null($codiceFase) && !is_null($odl)) $url = $this->baseUrl."/distinta-base/odl/".$odl."/fase/".$codiceFase;
         elseif(!is_null($codart)) $url = $this->baseUrl."/distinta-base/cod/".$codart."/alt/".$alt;
         elseif(!is_null($odl)) $url = $this->baseUrl."/distinta-base/odl/".$odl."/alt/".$alt;
@@ -645,6 +646,13 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
+    public function getMateriali($id = NULL, $codm = NULL) {
+        if(!is_null($id)) $url = $this->baseUrl."/materiali/id/".$id;
+        elseif(!is_null($codm)) $url = $this->baseUrl."/materiali/codice/".urlencode($codm);
+        else $url = $this->baseUrl."/materiali";
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+    }
+
 
     
 
@@ -681,6 +689,11 @@ class NodeRed {
     
     public function putDistintaBaseUsata($data) {
         $url = $this->baseUrl."/distinta-base-usata";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+    
+    public function putDistintaBaseUsataScarico($data) {
+        $url = $this->baseUrl."/distinta-base-usata-scarico";
         return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
@@ -956,6 +969,26 @@ class NodeRed {
         $data = ["Id" => $id, "OperatoriLettura" => $operatori];
         $url = $this->baseUrl . "/task-note-erp-operatori-lettura";
         return HttpCalls::put($url, $data, "application/json", ["Authorization: " . $this->authToken]);
+    }
+
+    public function putCentroDiLavoroDistintaBaseScarico($data) {
+        $url = $this->baseUrl."/centri-di-lavoro-distinta-base-scarico";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function putLottiGiacenza($data) {
+        $url = $this->baseUrl."/lotti-giacenza";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function putMaterialiGiacenza($data) {
+        $url = $this->baseUrl."/materiali-giacenza";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function putCentroDiLavoroTipoReport($data) {
+        $url = $this->baseUrl."/centri-di-lavoro-tipo-report";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
 
