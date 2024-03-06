@@ -991,6 +991,16 @@ class NodeRed {
         return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
+    public function putOrdiniDiLavoro($data) {
+        $url = $this->baseUrl."/ordini-di-lavoro";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function putFasi($data) {
+        $url = $this->baseUrl."/fasi";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
 
 
 
