@@ -272,10 +272,12 @@ class NodeRed {
     }
 
     public function getRepartoCentriDiLavoro($codReparto = NULL, $codCdl = NULL) {
-        if(!is_null($codReparto)) $url = $this->baseUrl."/reparti-centri-di-lavoro/cod/".$codReparto;
+        if(!is_null($codReparto) && !is_null($codCdl)) $url = $this->baseUrl."/reparti-centri-di-lavoro/cod/".$codReparto."/codcdl/".$codCdl;
+        elseif(!is_null($codReparto)) $url = $this->baseUrl."/reparti-centri-di-lavoro/cod/".$codReparto;
         elseif(!is_null($codCdl)) $url = $this->baseUrl."/reparti-centri-di-lavoro/codcdl/".$codCdl;
         else $url = $this->baseUrl."/reparti-centri-di-lavoro";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+        var_dump($url);
     }
 
     public function getTaskToDo($cdl, $ntask = 5) {
