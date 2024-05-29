@@ -665,8 +665,14 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     } 
 
-    public function getFormQualitaCompilati($id = NULL) {
+    public function getFormQualitaCompilati($id = NULL,$idDocumento = NULL,$idRiga = NULL,$codiceCdl = NULL,$taskId = NULL,$runningTaskId = NULL,$idFormQualita = NULL) {
         if(!is_null($id)) $url = $this->baseUrl."/form-qualita-compilati/id/".$id;
+        elseif(!is_null($idDocumento) && !is_null($idRiga)) $url = $this->baseUrl."/form-qualita-compilati/documento/".$idDocumento."/riga/".$idRiga;
+        elseif(!is_null($idDocumento)) $url = $this->baseUrl."/form-qualita-compilati/documento/".$idDocumento;
+        elseif(!is_null($codiceCdl)) $url = $this->baseUrl."/form-qualita-compilati/cdl/".$codiceCdl;
+        elseif(!is_null($taskId)) $url = $this->baseUrl."/form-qualita-compilati/task/".$taskId;
+        elseif(!is_null($runningTaskId)) $url = $this->baseUrl."/form-qualita-compilati/running-task/".$runningTaskId;
+        elseif(!is_null($idFormQualita)) $url = $this->baseUrl."/form-qualita-compilati/form-qualita/".$idFormQualita;
         else $url = $this->baseUrl."/form-qualita-compilati";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
