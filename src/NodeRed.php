@@ -174,9 +174,10 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
-    public function getStoricoEventi($cdl = NULL, $taskId = NULL, $codiceOdl = NULL) {
+    public function getStoricoEventi($id = NULL, $cdl = NULL, $taskId = NULL, $codiceOdl = NULL) {
         if(!is_null($cdl)) $url = $this->baseUrl."/storico-eventi/cdl/".$cdl;
         elseif(!is_null($taskId)) $url = $this->baseUrl."/storico-eventi/task/".$taskId;
+        elseif(!is_null($id)) $url = $this->baseUrl."/storico-eventi/id/".$id;
         elseif(!is_null($codiceOdl)) $url = $this->baseUrl."/storico-eventi/odl/".$codiceOdl;
         else $url = $this->baseUrl."/storico-eventi";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
@@ -218,8 +219,9 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
-    public function getDistintaBaseUsata($runningTask = NULL, $task = NULL, $distintaId = NULL, $codiceOdl = NULL) {
-        if(!is_null($task)) $url = $this->baseUrl."/distinta-base-usata/task/".$task;
+    public function getDistintaBaseUsata($id = NULL,$runningTask = NULL, $task = NULL, $distintaId = NULL, $codiceOdl = NULL) {
+        if(!is_null($id)) $url = $this->baseUrl."/distinta-base-usata/id/".$id;
+        elseif(!is_null($task)) $url = $this->baseUrl."/distinta-base-usata/task/".$task;
         elseif(!is_null($distintaId)) $url = $this->baseUrl."/distinta-base-usata/distinta/".$distintaId;
         elseif(!is_null($codiceOdl)) $url = $this->baseUrl."/distinta-base-usata/odl/".$codiceOdl;
         elseif(!is_null($runningTask)) $url = $this->baseUrl."/distinta-base-usata/rtask/".$runningTask;
@@ -625,9 +627,10 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
-    public function getEtichetteStampate($id = NULL,$runningTaskId = NULL) {
+    public function getEtichetteStampate($id = NULL,$runningTaskId = NULL,$codiceCdl = NULL) {
         if(!is_null($id)) $url = $this->baseUrl."/etichette-stampate/id/".$id;
         elseif(!is_null($runningTaskId)) $url = $this->baseUrl."/etichette-stampate/running-task/".$runningTaskId;
+        elseif(!is_null($codiceCdl)) $url = $this->baseUrl."/etichette-stampate/cdl/".$codiceCdl;
         else $url = $this->baseUrl."/etichette-stampate";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
@@ -652,6 +655,32 @@ class NodeRed {
         if(!is_null($id)) $url = $this->baseUrl."/materiali/id/".$id;
         elseif(!is_null($codm)) $url = $this->baseUrl."/materiali/codice/".urlencode($codm);
         else $url = $this->baseUrl."/materiali";
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+    }
+
+    public function getFormQualita($id = NULL,$codiceArticolo = NULL) {
+        if(!is_null($id)) $url = $this->baseUrl."/form-qualita/id/".$id;
+        elseif(!is_null($codiceArticolo)) $url = $this->baseUrl."/form-qualita/articolo/".$codiceArticolo;
+        else $url = $this->baseUrl."/form-qualita";
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+    } 
+
+    public function getFormQualitaCompilati($id = NULL) {
+        if(!is_null($id)) $url = $this->baseUrl."/form-qualita-compilati/id/".$id;
+        else $url = $this->baseUrl."/form-qualita-compilati";
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+    }
+
+    public function getDraftTask($id = NULL, $cdl = NULL) {
+        if(!is_null($id)) $url = $this->baseUrl."/draft-task/id/".$id;
+        elseif(!is_null($cdl)) $url = $this->baseUrl."/draft-task/cdl/".$cdl;
+        else $url = $this->baseUrl."/draft-task";
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+    }
+
+    public function getCausaliProduzione($cod = NULL) {
+        if(!is_null($cod)) $url = $this->baseUrl."/causali-produzione/cod/".$cod;
+        else $url = $this->baseUrl."/causali-produzione";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
@@ -1003,6 +1032,41 @@ class NodeRed {
         return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
+    public function putFormQualita($data) {
+        $url = $this->baseUrl."/form-qualita";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function putFormQualitaCompilati($data) {
+        $url = $this->baseUrl."/form-qualita-compilati";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+    
+    public function putDistintaBaseUsataQnt($data) {
+        $url = $this->baseUrl."/distinta-base-usata-qnt";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function putTaskDraft($data) {
+        $url = $this->baseUrl."/task-draft";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function putCausaliProduzione($data) {
+        $url = $this->baseUrl."/causali-produzione";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function putEtichetteStampateQuantitaDichiarata($data) {
+        $url = $this->baseUrl."/etichette-stampate-quantita-dichiarata";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function putEtichetteStampateQuantitaScartata($data) {
+        $url = $this->baseUrl."/etichette-stampate-quantita-scartata";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
 
 
 
@@ -1325,6 +1389,18 @@ class NodeRed {
     public function deleteTaskNoteErp($id) {
         $data = [ "Id" => $id ];
         $url = $this->baseUrl."/task-note-erp";
+        return HttpCalls::delete($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function deleteDistintaBaseUsata($id) {
+        $data = [[ "Id" => $id ]];
+        $url = $this->baseUrl."/distinta-base-usata";
+        return HttpCalls::delete($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function deleteCausaliProduzione($codiceCausale) {
+        $data = [ "CodiceCausale" => $codiceCausale ];
+        $url = $this->baseUrl."/causali-produzione";
         return HttpCalls::delete($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
