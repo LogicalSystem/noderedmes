@@ -200,13 +200,15 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
-    public function getDistintaBase($codart = NULL, $odl = NULL, $id = NULL, $mat = NULL, $alt = "false", $codiceFase = NULL) {
+    public function getDistintaBase($codart = NULL, $odl = NULL, $id = NULL, $mat = NULL, $alt = "false", $codiceFase = NULL, $codiceNesting = NULL) {
         if(!is_null($mat) && !is_null($odl) && !is_null($codiceFase)) $url = $this->baseUrl."/distinta-base/mat/".urlencode($mat)."/odl/".$odl."/fase/".$codiceFase;
         elseif(!is_null($mat) && !is_null($odl)) $url = $this->baseUrl."/distinta-base/mat/".urlencode($mat)."/odl/".$odl;
+        elseif(!is_null($mat) && !is_null($codiceNesting)) $url = $this->baseUrl."/distinta-base/codice-nesting/".$codiceNesting."/mat/".urlencode($mat);
         elseif(!is_null($codiceFase) && !is_null($odl)) $url = $this->baseUrl."/distinta-base/odl/".$odl."/fase/".$codiceFase;
         elseif(!is_null($codart)) $url = $this->baseUrl."/distinta-base/cod/".$codart."/alt/".$alt;
         elseif(!is_null($odl)) $url = $this->baseUrl."/distinta-base/odl/".$odl."/alt/".$alt;
         elseif(!is_null($id)) $url = $this->baseUrl."/distinta-base/id/".$id;
+        elseif(!is_null($codiceNesting)) $url = $this->baseUrl."/distinta-base/codice-nesting/".$codiceNesting;
         else $url = $this->baseUrl."/distinta-base";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
