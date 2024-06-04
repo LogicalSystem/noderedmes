@@ -660,7 +660,7 @@ class NodeRed {
 
     public function getFormQualita($id = NULL,$codiceArticolo = NULL) {
         if(!is_null($id)) $url = $this->baseUrl."/form-qualita/id/".$id;
-        elseif(!is_null($codiceArticolo)) $url = $this->baseUrl."/form-qualita/articolo/".$codiceArticolo;
+        elseif(!is_null($codiceArticolo)) $url = $this->baseUrl."/form-qualita/articolo/".urlencode($codiceArticolo);
         else $url = $this->baseUrl."/form-qualita";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     } 
