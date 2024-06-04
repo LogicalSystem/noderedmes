@@ -637,7 +637,7 @@ class NodeRed {
 
     public function getTaskNoteErp($codiceOdl = NULL, $codiceFase = NULL, $codiceArticolo = NULL, $codiceFaseExtra = NULL) {
         if(!is_null($codiceOdl) && !is_null($codiceFase)) $url = $this->baseUrl."/task-note-erp/odl/".$codiceOdl."/fase/".$codiceFase;
-        elseif(!is_null($codiceArticolo) && !is_null($codiceFaseExtra)) $url = $this->baseUrl."/task-note-erp/articolo/".$codiceArticolo."/fase-extra/".$codiceFaseExtra;
+        elseif(!is_null($codiceArticolo) && !is_null($codiceFaseExtra)) $url = $this->baseUrl."/task-note-erp/articolo/".urlencode($codiceArticolo)."/fase-extra/".$codiceFaseExtra;
         elseif(!is_null($codiceOdl)) $url = $this->baseUrl."/task-note-erp/odl/".$codiceOdl;
         elseif(!is_null($codiceFase)) $url = $this->baseUrl."/task-note-erp/fase/".$codiceFase;
         else $url = $this->baseUrl."/task-note-erp";
