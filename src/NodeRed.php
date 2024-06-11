@@ -698,10 +698,17 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
-    public function getImpianti($codidceImpianto = NULL, $codiceReparto = NULL) {
-        if(!is_null($codidceImpianto)) $url = $this->baseUrl."/impianti/cod/".$codidceImpianto;
+    public function getImpianti($codiceImpianto = NULL, $codiceReparto = NULL) {
+        if(!is_null($codiceImpianto)) $url = $this->baseUrl."/impianti/cod/".$codiceImpianto;
         elseif(!is_null($codiceReparto)) $url = $this->baseUrl."/impianti/reparto/".$codiceReparto;
         else $url = $this->baseUrl."/impianti";
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+    }
+
+    public function getNodi($codiceNodo = NULL, $codidceImpianto = NULL) {
+        if(!is_null($codiceNodo)) $url = $this->baseUrl."/nodi/cod/".$codiceNodo;
+        elseif(!is_null($codidceImpianto)) $url = $this->baseUrl."/nodi/impianto/".$codidceImpianto;
+        else $url = $this->baseUrl."/nodi";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
@@ -1098,6 +1105,11 @@ class NodeRed {
         return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
+    public function putNodi($data) {
+        $url = $this->baseUrl."/nodi";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
 
 
 
@@ -1444,6 +1456,12 @@ class NodeRed {
     public function deleteStabilimenti($Codice) {
         $data = [ "CodiceStabilimento" => $Codice ];
         $url = $this->baseUrl."/stabilimenti";
+        return HttpCalls::delete($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function deleteNodi($Codice) {
+        $data = [ "CodiceNodo" => $Codice ];
+        $url = $this->baseUrl."/nodi";
         return HttpCalls::delete($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
