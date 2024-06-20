@@ -706,7 +706,7 @@ class NodeRed {
     }
 
     public function getNodi($codiceNodo = NULL, $codidceImpianto = NULL) {
-        if(!is_null($codiceNodo)) $url = $this->baseUrl."/nodi/cod/".$codiceNodo;
+        if(!is_null($codiceNodo)) $url = $this->baseUrl."/nodi/nodo/".$codiceNodo;
         elseif(!is_null($codidceImpianto)) $url = $this->baseUrl."/nodi/impianto/".$codidceImpianto;
         else $url = $this->baseUrl."/nodi";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
@@ -1107,6 +1107,11 @@ class NodeRed {
 
     public function putNodi($data) {
         $url = $this->baseUrl."/nodi";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function putCentroDiLavoroConsumi($data) {
+        $url = $this->baseUrl."/centri-di-lavoro-consumi";
         return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
