@@ -712,6 +712,12 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
+    public function getNodiCentriDiLavoro($codiceNodo = NULL) {
+        if(!is_null($codiceNodo)) $url = $this->baseUrl."/nodi-centri-di-lavoro/nodo/".$codiceNodo;
+        else $url = $this->baseUrl."/nodi-centri-di-lavoro";
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
+    }
+
 
     
 
