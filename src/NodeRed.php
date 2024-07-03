@@ -2,6 +2,7 @@
 
 namespace LogicalSystem\NodeRed;
 
+use app\lib\Utility;
 use LogicalSystem\HttpCalls\HttpCalls;
 
 class NodeRed {
@@ -200,23 +201,27 @@ class NodeRed {
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
-    public function getDistintaBase($codart = NULL, $odl = NULL, $id = NULL, $mat = NULL, $alt = "false", $codiceFase = NULL, $codiceNesting = NULL) {
+    public function getDistintaBase($codart = NULL, $odl = NULL, $id = NULL, $mat = NULL, $alt = "false", $codiceFase = NULL, $codiceNesting = NULL, $tipologiaMateriale = NULL) {
         if(!is_null($mat) && !is_null($odl) && !is_null($codiceFase)) $url = $this->baseUrl."/distinta-base/mat/".urlencode($mat)."/odl/".$odl."/fase/".$codiceFase;
         elseif(!is_null($mat) && !is_null($odl)) $url = $this->baseUrl."/distinta-base/mat/".urlencode($mat)."/odl/".$odl;
         elseif(!is_null($mat) && !is_null($codiceNesting)) $url = $this->baseUrl."/distinta-base/codice-nesting/".$codiceNesting."/mat/".urlencode($mat);
+        elseif(!is_null($mat) && !is_null($tipologiaMateriale)) $url = $this->baseUrl."/distinta-base/codice-nesting/".$codiceNesting."/tipologia-materiale/".urlencode($tipologiaMateriale);
         elseif(!is_null($codiceFase) && !is_null($odl)) $url = $this->baseUrl."/distinta-base/odl/".$odl."/fase/".$codiceFase;
         elseif(!is_null($codart)) $url = $this->baseUrl."/distinta-base/cod/".$codart."/alt/".$alt;
         elseif(!is_null($odl)) $url = $this->baseUrl."/distinta-base/odl/".$odl."/alt/".$alt;
         elseif(!is_null($id)) $url = $this->baseUrl."/distinta-base/id/".$id;
         elseif(!is_null($codiceNesting)) $url = $this->baseUrl."/distinta-base/codice-nesting/".$codiceNesting;
+        elseif(!is_null($tipologiaMateriale)) $url = $this->baseUrl."/distinta-base/tipologia-materiale/".urlencode($tipologiaMateriale);
         else $url = $this->baseUrl."/distinta-base";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
-    public function getLotti($codl = NULL, $codm = NULL) {
-        if(!is_null($codl) && !is_null($codm)) $url = $this->baseUrl."/lotti/codice-lotto/".$codl."/codice-materiale/".urlencode($codm);
-        elseif(!is_null($codl)) $url = $this->baseUrl."/lotti/codice-lotto/".$codl;
+    public function getLotti($codl = NULL, $codm = NULL, $tipologiaMateriale = NULL) {
+        if(!is_null($codl) && !is_null($codm)) $url = $this->baseUrl."/lotti/codice-lotto/".urlencode($codl)."/codice-materiale/".urlencode($codm);
+        if(!is_null($codl) && !is_null($tipologiaMateriale)) $url = $this->baseUrl."/lotti/codice-lotto/".urlencode($codl)."/tipologia-materiale/".urlencode($tipologiaMateriale);
+        elseif(!is_null($codl)) $url = $this->baseUrl."/lotti/codice-lotto/".urlencode($codl);
         elseif(!is_null($codm)) $url = $this->baseUrl."/lotti/codice-materiale/".urlencode($codm);
+        elseif(!is_null($tipologiaMateriale)) $url = $this->baseUrl."/lotti/tipologia-materiale/".urlencode($tipologiaMateriale);
         else $url = $this->baseUrl."/lotti";
         return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
@@ -1118,6 +1123,11 @@ class NodeRed {
 
     public function putCentroDiLavoroConsumi($data) {
         $url = $this->baseUrl."/centri-di-lavoro-consumi";
+        return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+    
+    public function putDistintaBaseUsataStorno($data) {
+        $url = $this->baseUrl."/distinta-base-usata-storno";
         return HttpCalls::put($url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
