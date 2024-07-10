@@ -227,14 +227,15 @@ class NodeRed {
         return call_user_func([$this->httpClass,"get"],$url,["Authorization: ".$this->authToken]);
     }
 
-    public function getDistintaBaseUsata($id = NULL,$runningTask = NULL, $task = NULL, $distintaId = NULL, $codiceOdl = NULL) {
+    public function getDistintaBaseUsata($id = NULL,$runningTask = NULL, $task = NULL, $distintaId = NULL, $codiceOdl = NULL, $stornoIdRef = NULL) {
         if(!is_null($id)) $url = $this->baseUrl."/distinta-base-usata/id/".$id;
         elseif(!is_null($task)) $url = $this->baseUrl."/distinta-base-usata/task/".$task;
         elseif(!is_null($distintaId)) $url = $this->baseUrl."/distinta-base-usata/distinta/".$distintaId;
         elseif(!is_null($codiceOdl)) $url = $this->baseUrl."/distinta-base-usata/odl/".$codiceOdl;
         elseif(!is_null($runningTask)) $url = $this->baseUrl."/distinta-base-usata/rtask/".$runningTask;
+        elseif(!is_null($stornoIdRef)) $url = $this->baseUrl."/distinta-base-usata/ref-id/".$stornoIdRef;
         else $url = $this->baseUrl."/distinta-base-usata";
-        return call_user_func([$this->httpClass,"get"],$url,["Authorization: ".$this->authToken]);
+        return HttpCalls::get($url,["Authorization: ".$this->authToken]);
     }
 
     public function getOperatoriEventi($cdl = NULL, $op = NULL) {
