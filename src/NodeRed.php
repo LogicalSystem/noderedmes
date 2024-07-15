@@ -725,6 +725,11 @@ class NodeRed {
         return call_user_func([$this->httpClass,"get"],$url,["Authorization: ".$this->authToken]);
     }
 
+    public function getStoricoEventiCdl($codiceCdl) {
+        $url = $this->baseUrl."/storico-eventi-cdl/cdl/".$codiceCdl;
+        return call_user_func([$this->httpClass,"get"],$url,["Authorization: ".$this->authToken]);
+    }
+
 
     
 
