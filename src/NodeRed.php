@@ -730,6 +730,15 @@ class NodeRed {
         return call_user_func([$this->httpClass,"get"],$url,["Authorization: ".$this->authToken]);
     }
 
+    public function getCentriDiLavoroTransazioniLavorazione($id = NULL, $codiceCdl = NULL, $completato = NULL) {
+        if(!is_null($id)) $url = $this->baseUrl."/centri-di-lavoro-transazioni-lavorazione/id/".$id;
+        elseif(!is_null($codiceCdl) && !is_null($completato)) $url = $this->baseUrl."/centri-di-lavoro-transazioni-lavorazione/cdl/".$codiceCdl."/completate/".$completato;
+        elseif(!is_null($codiceCdl)) $url = $this->baseUrl."/centri-di-lavoro-transazioni-lavorazione/cdl/".$codiceCdl;
+        elseif(!is_null($completato)) $url = $this->baseUrl."/centri-di-lavoro-transazioni-lavorazione/completate/".$completato;
+        else $url = $this->baseUrl."/centri-di-lavoro-transazioni-lavorazione";
+        return call_user_func([$this->httpClass,"get"],$url,["Authorization: ".$this->authToken]);
+    }
+
 
     
 
@@ -1140,6 +1149,11 @@ class NodeRed {
     
     public function putCentriDiLavoroCalcoloDistintaBase($data) {
         $url = $this->baseUrl."/centri-di-lavoro-calcolo-distinta-base";
+        return call_user_func([$this->httpClass,"put"],$url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+    
+    public function putCentriDiLavoroTransazioniLavorazione($data) {
+        $url = $this->baseUrl."/centri-di-lavoro-transazioni-lavorazione";
         return call_user_func([$this->httpClass,"put"],$url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
