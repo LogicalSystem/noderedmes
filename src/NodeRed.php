@@ -1137,6 +1137,11 @@ class NodeRed {
         $url = $this->baseUrl."/distinta-base-usata-storno";
         return call_user_func([$this->httpClass,"put"],$url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
+    
+    public function putCentriDiLavoroCalcoloDistintaBase($data) {
+        $url = $this->baseUrl."/centri-di-lavoro-calcolo-distinta-base";
+        return call_user_func([$this->httpClass,"put"],$url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
 
 
 
