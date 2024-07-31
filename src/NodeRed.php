@@ -60,7 +60,7 @@ class NodeRed
     public function getOrdiniDiLavoro($odl = NULL, $task = NULL)
     {
         if (!is_null($task)) $url = $this->baseUrl . "/ordini-di-lavoro/task/" . $task;
-        elseif (!is_null($odl)) $url = $this->baseUrl . "/ordini-di-lavoro/odl/" . $odl;
+        elseif (!is_null($odl)) $url = $this->baseUrl . "/ordini-di-lavoro/odl/" . urlencode($odl);
         else $url = $this->baseUrl . "/ordini-di-lavoro";
         return call_user_func([$this->httpClass, "get"], $url, ["Authorization: " . $this->authToken]);
     }
@@ -80,7 +80,7 @@ class NodeRed
     public function getOrdiniDiLavoroPossibili($cdl, $odl = NULL)
     {
         if (is_null($odl)) $url = $this->baseUrl . "/ordini-di-lavoroPossibili/cdl/" . $cdl;
-        else $url = $this->baseUrl . "/ordini-di-lavoroPossibili/cdl/" . $cdl . "/odl/" . $odl;
+        else $url = $this->baseUrl . "/ordini-di-lavoroPossibili/cdl/" . $cdl . "/odl/" . urlencode($odl);
         return call_user_func([$this->httpClass, "get"], $url, ["Authorization: " . $this->authToken]);
     }
 
@@ -88,8 +88,8 @@ class NodeRed
     public function getFasi($task = NULL, $cod = NULL, $codiceOdl = NULL)
     {
         if (!is_null($task)) $url = $this->baseUrl . "/fasi/task/" . $task;
-        elseif (!is_null($cod)) $url = $this->baseUrl . "/fasi/cod/" . $cod;
-        elseif (!is_null($codiceOdl)) $url = $this->baseUrl . "/fasi/odl/" . $codiceOdl;
+        elseif (!is_null($cod)) $url = $this->baseUrl . "/fasi/cod/" . urlencode($cod);
+        elseif (!is_null($codiceOdl)) $url = $this->baseUrl . "/fasi/odl/" . urlencode($codiceOdl);
         else $url = $this->baseUrl . "/fasi";
         return call_user_func([$this->httpClass, "get"], $url, ["Authorization: " . $this->authToken]);
     }
@@ -114,10 +114,10 @@ class NodeRed
     public function getTask($id = NULL, $odl = NULL, $cdl = NULL, $parentTask = NULL, $fase = NULL, $codiceOperatore = NULL)
     {
         if (!is_null($id)) $url = $this->baseUrl . "/task/id/" . $id;
-        elseif (!is_null($odl) && !is_null($fase)) $url = $this->baseUrl . "/task/odl/" . $odl . "/fase/" . $fase;
-        elseif (!is_null($odl) && !is_null($cdl)) $url = $this->baseUrl . "/task/odl/" . $odl . "/cdl/" . $cdl;
+        elseif (!is_null($odl) && !is_null($fase)) $url = $this->baseUrl . "/task/odl/" . urlencode($odl) . "/fase/" . urlencode($fase);
+        elseif (!is_null($odl) && !is_null($cdl)) $url = $this->baseUrl . "/task/odl/" . urlencode($odl) . "/cdl/" . $cdl;
         elseif (!is_null($cdl)) $url = $this->baseUrl . "/task/cdl/" . $cdl;
-        elseif (!is_null($odl)) $url = $this->baseUrl . "/task/odl/" . $odl;
+        elseif (!is_null($odl)) $url = $this->baseUrl . "/task/odl/" . urlencode($odl);
         elseif (!is_null($parentTask)) $url = $this->baseUrl . "/task/parent/" . $parentTask;
         elseif (!is_null($codiceOperatore)) $url = $this->baseUrl . "/task/op/" . $codiceOperatore;
         else $url = $this->baseUrl . "/task";
@@ -128,10 +128,10 @@ class NodeRed
     public function getTaskRaw($id = NULL, $odl = NULL, $cdl = NULL, $parentTask = NULL, $fase = NULL, $codiceOperatore = NULL)
     {
         if (!is_null($id)) $url = $this->baseUrl . "/task-raw/id/" . $id;
-        elseif (!is_null($odl) && !is_null($fase)) $url = $this->baseUrl . "/task-raw/odl/" . $odl . "/fase/" . $fase;
-        elseif (!is_null($odl) && !is_null($cdl)) $url = $this->baseUrl . "/task-raw/odl/" . $odl . "/cdl/" . $cdl;
+        elseif (!is_null($odl) && !is_null($fase)) $url = $this->baseUrl . "/task-raw/odl/" . urlencode($odl) . "/fase/" . urlencode($fase);
+        elseif (!is_null($odl) && !is_null($cdl)) $url = $this->baseUrl . "/task-raw/odl/" . urlencode($odl) . "/cdl/" . $cdl;
         elseif (!is_null($cdl)) $url = $this->baseUrl . "/task-raw/cdl/" . $cdl;
-        elseif (!is_null($odl)) $url = $this->baseUrl . "/task-raw/odl/" . $odl;
+        elseif (!is_null($odl)) $url = $this->baseUrl . "/task-raw/odl/" . urlencode($odl);
         elseif (!is_null($parentTask)) $url = $this->baseUrl . "/task-raw/parent/" . $parentTask;
         elseif (!is_null($codiceOperatore)) $url = $this->baseUrl . "/task-raw/op/" . $codiceOperatore;
         else $url = $this->baseUrl . "/task-raw";
@@ -227,15 +227,15 @@ class NodeRed
 
     public function getDistintaBase($codart = NULL, $odl = NULL, $id = NULL, $mat = NULL, $alt = "false", $codiceFase = NULL, $codiceNesting = NULL, $tipologiaMateriale = NULL)
     {
-        if (!is_null($mat) && !is_null($odl) && !is_null($codiceFase)) $url = $this->baseUrl . "/distinta-base/mat/" . urlencode($mat) . "/odl/" . $odl . "/fase/" . $codiceFase;
-        elseif (!is_null($mat) && !is_null($odl)) $url = $this->baseUrl . "/distinta-base/mat/" . urlencode($mat) . "/odl/" . $odl;
-        elseif (!is_null($mat) && !is_null($codiceNesting)) $url = $this->baseUrl . "/distinta-base/codice-nesting/" . $codiceNesting . "/mat/" . urlencode($mat);
+        if (!is_null($mat) && !is_null($odl) && !is_null($codiceFase)) $url = $this->baseUrl . "/distinta-base/mat/" . urlencode($mat) . "/odl/" . urlencode($odl) . "/fase/" . urlencode($codiceFase);
+        elseif (!is_null($mat) && !is_null($odl)) $url = $this->baseUrl . "/distinta-base/mat/" . urlencode($mat) . "/odl/" . urlencode($odl);
+        elseif (!is_null($mat) && !is_null($codiceNesting)) $url = $this->baseUrl . "/distinta-base/codice-nesting/" . urlencode($codiceNesting) . "/mat/" . urlencode($mat);
         elseif (!is_null($mat) && !is_null($tipologiaMateriale)) $url = $this->baseUrl . "/distinta-base/codice-nesting/" . $codiceNesting . "/tipologia-materiale/" . urlencode($tipologiaMateriale);
-        elseif (!is_null($codiceFase) && !is_null($odl)) $url = $this->baseUrl . "/distinta-base/odl/" . $odl . "/fase/" . $codiceFase;
+        elseif (!is_null($codiceFase) && !is_null($odl)) $url = $this->baseUrl . "/distinta-base/odl/" . urlencode($odl) . "/fase/" . urlencode($codiceFase);
         elseif (!is_null($codart)) $url = $this->baseUrl . "/distinta-base/cod/" . $codart . "/alt/" . $alt;
-        elseif (!is_null($odl)) $url = $this->baseUrl . "/distinta-base/odl/" . $odl . "/alt/" . $alt;
+        elseif (!is_null($odl)) $url = $this->baseUrl . "/distinta-base/odl/" . urlencode($odl) . "/alt/" . $alt;
         elseif (!is_null($id)) $url = $this->baseUrl . "/distinta-base/id/" . $id;
-        elseif (!is_null($codiceNesting)) $url = $this->baseUrl . "/distinta-base/codice-nesting/" . $codiceNesting;
+        elseif (!is_null($codiceNesting)) $url = $this->baseUrl . "/distinta-base/codice-nesting/" . urlencode($codiceNesting);
         elseif (!is_null($tipologiaMateriale)) $url = $this->baseUrl . "/distinta-base/tipologia-materiale/" . urlencode($tipologiaMateriale);
         else $url = $this->baseUrl . "/distinta-base";
         return call_user_func([$this->httpClass, "get"], $url, ["Authorization: " . $this->authToken]);
@@ -364,11 +364,11 @@ class NodeRed
 
     public function getAttrezzature($codiceAttrezzatura = NULL, $codiceOdl = NULL, $codiceFase = NULL)
     {
-        if (!is_null($codiceAttrezzatura) && !is_null($codiceOdl) && !is_null($codiceFase)) $url = $this->baseUrl . "/attrezzature/codice/" . $codiceAttrezzatura . "/odl/" . $codiceOdl . "/fase/" . $codiceFase;
-        elseif (!is_null($codiceOdl) && !is_null($codiceFase)) $url = $this->baseUrl . "/attrezzature/odl/" . $codiceOdl . "/fase/" . $codiceFase;
+        if (!is_null($codiceAttrezzatura) && !is_null($codiceOdl) && !is_null($codiceFase)) $url = $this->baseUrl . "/attrezzature/codice/" . $codiceAttrezzatura . "/odl/" . urlencode($codiceOdl) . "/fase/" . $codiceFase;
+        elseif (!is_null($codiceOdl) && !is_null($codiceFase)) $url = $this->baseUrl . "/attrezzature/odl/" . urlencode($codiceOdl) . "/fase/" . urlencode($codiceFase);
         elseif (!is_null($codiceAttrezzatura)) $url = $this->baseUrl . "/attrezzature/codice/" . $codiceAttrezzatura;
-        elseif (!is_null($codiceOdl)) $url = $this->baseUrl . "/attrezzature/odl/" . $codiceOdl;
-        elseif (!is_null($codiceFase)) $url = $this->baseUrl . "/attrezzature/fase/" . $codiceFase;
+        elseif (!is_null($codiceOdl)) $url = $this->baseUrl . "/attrezzature/odl/" . urlencode($codiceOdl);
+        elseif (!is_null($codiceFase)) $url = $this->baseUrl . "/attrezzature/fase/" . urlencode($codiceFase);
         else $url = $this->baseUrl . "/attrezzature";
         return call_user_func([$this->httpClass, "get"], $url, ["Authorization: " . $this->authToken]);
     }
@@ -722,10 +722,10 @@ class NodeRed
 
     public function getTaskNoteErp($codiceOdl = NULL, $codiceFase = NULL, $codiceArticolo = NULL, $codiceFaseExtra = NULL)
     {
-        if (!is_null($codiceOdl) && !is_null($codiceFase)) $url = $this->baseUrl . "/task-note-erp/odl/" . $codiceOdl . "/fase/" . $codiceFase;
+        if (!is_null($codiceOdl) && !is_null($codiceFase)) $url = $this->baseUrl . "/task-note-erp/odl/" . urlencode($codiceOdl) . "/fase/" . urlencode($codiceFase);
         elseif (!is_null($codiceArticolo) && !is_null($codiceFaseExtra)) $url = $this->baseUrl . "/task-note-erp/articolo/" . urlencode($codiceArticolo) . "/fase-extra/" . $codiceFaseExtra;
-        elseif (!is_null($codiceOdl)) $url = $this->baseUrl . "/task-note-erp/odl/" . $codiceOdl;
-        elseif (!is_null($codiceFase)) $url = $this->baseUrl . "/task-note-erp/fase/" . $codiceFase;
+        elseif (!is_null($codiceOdl)) $url = $this->baseUrl . "/task-note-erp/odl/" . urlencode($codiceOdl);
+        elseif (!is_null($codiceFase)) $url = $this->baseUrl . "/task-note-erp/fase/" . urlencode($codiceFase);
         else $url = $this->baseUrl . "/task-note-erp";
         return call_user_func([$this->httpClass, "get"], $url, ["Authorization: " . $this->authToken]);
     }
