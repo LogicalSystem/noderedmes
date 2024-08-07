@@ -1324,6 +1324,12 @@ class NodeRed
         return call_user_func([$this->httpClass, "put"], $url, $data, "application/json", ["Authorization: " . $this->authToken]);
     }
 
+    public function putCentriDiLavoroTipoChiusuraTransazione($data)
+    {
+        $url = $this->baseUrl . "/centri-di-lavoro-chiusura-transazione";
+        return call_user_func([$this->httpClass, "put"], $url, $data, "application/json", ["Authorization: " . $this->authToken]);
+    }
+
 
 
 
