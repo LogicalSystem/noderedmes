@@ -828,6 +828,14 @@ class NodeRed
         return call_user_func([$this->httpClass, "get"], $url, ["Authorization: " . $this->authToken]);
     }
 
+    public function getCentriDiLavoroRegoleMisurazioniConsumi($id = NULL, $codiceCdl = NULL, $uuid = NULL)
+    {
+        if (!is_null($codiceCdl)) $url = $this->baseUrl . "/centri-di-lavoro-regole-misurazioni-consumi/cdl/" . $codiceCdl;
+        elseif (!is_null($uuid)) $url = $this->baseUrl . "/centri-di-lavoro-regole-misurazioni-consumi/uuid/" . $uuid;
+        else $url = $this->baseUrl . "/centri-di-lavoro-regole-misurazioni-consumi";
+        return call_user_func([$this->httpClass, "get"], $url, ["Authorization: " . $this->authToken]);
+    }
+
 
 
 
@@ -1335,6 +1343,16 @@ class NodeRed
         return call_user_func([$this->httpClass,"put"],$url,$data,"application/json",["Authorization: ".$this->authToken]);
     }
 
+    public function putCentriDiLavoroRegoleMisurazioniConsumi($data) {
+        $url = $this->baseUrl."/centri-di-lavoro-regole-misurazioni-consumi";
+        return call_user_func([$this->httpClass,"put"],$url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function putProtocolliMisurazioniMisuraRiferimento($data) {
+        $url = $this->baseUrl."/protocolli-misurazioni-misura-riferimento";
+        return call_user_func([$this->httpClass,"put"],$url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
 
 
 
@@ -1742,6 +1760,13 @@ class NodeRed
     {
         $data = ["CodiceNodo" => $Codice];
         $url = $this->baseUrl . "/nodi";
+        return call_user_func([$this->httpClass, "delete"], $url, $data, "application/json", ["Authorization: " . $this->authToken]);
+    }
+
+    public function deleteCentriDiLavoroRegoleMisurazioniConsumi($uuid)
+    {
+        $data = ["Uuid" => $uuid];
+        $url = $this->baseUrl . "/centri-di-lavoro-regole-misurazioni-consumi";
         return call_user_func([$this->httpClass, "delete"], $url, $data, "application/json", ["Authorization: " . $this->authToken]);
     }
 
