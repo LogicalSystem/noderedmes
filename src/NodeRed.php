@@ -111,7 +111,7 @@ class NodeRed
     }
 
 
-    public function getTask($id = NULL, $odl = NULL, $cdl = NULL, $parentTask = NULL, $fase = NULL, $codiceOperatore = NULL)
+    public function getTask($id = NULL, $odl = NULL, $cdl = NULL, $parentTask = NULL, $fase = NULL, $codiceOperatore = NULL, $codiceNesting = NULL)
     {
         if (!is_null($id)) $url = $this->baseUrl . "/task/id/" . $id;
         elseif (!is_null($odl) && !is_null($fase)) $url = $this->baseUrl . "/task/odl/" . urlencode($odl) . "/fase/" . urlencode($fase);
@@ -120,6 +120,7 @@ class NodeRed
         elseif (!is_null($odl)) $url = $this->baseUrl . "/task/odl/" . urlencode($odl);
         elseif (!is_null($parentTask)) $url = $this->baseUrl . "/task/parent/" . $parentTask;
         elseif (!is_null($codiceOperatore)) $url = $this->baseUrl . "/task/op/" . $codiceOperatore;
+        elseif(!is_null($codiceNesting)) $url = $this->baseUrl."/task/nesting/".$codiceNesting;
         else $url = $this->baseUrl . "/task";
         return call_user_func([$this->httpClass, "get"], $url, ["Authorization: " . $this->authToken]);
     }
