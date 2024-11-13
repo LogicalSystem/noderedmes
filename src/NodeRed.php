@@ -837,6 +837,15 @@ class NodeRed
         return call_user_func([$this->httpClass, "get"], $url, ["Authorization: " . $this->authToken]);
     }
 
+    public function getReport($id = NULL, $taskId = NULL, $codiceOdl = NULL)
+    {
+        if (!is_null($id)) $url = $this->baseUrl . "/report/id/" . $id;
+        elseif (!is_null($taskId)) $url = $this->baseUrl . "/report/task/" . $taskId;
+        elseif (!is_null($codiceOdl)) $url = $this->baseUrl . "/report/odl/" . $codiceOdl;
+        else $url = $this->baseUrl . "/report";
+        return call_user_func([$this->httpClass, "get"], $url, ["Authorization: " . $this->authToken]);
+    }
+
 
 
 
@@ -1352,6 +1361,18 @@ class NodeRed
     public function putProtocolliMisurazioniMisuraRiferimento($data) {
         $url = $this->baseUrl."/protocolli-misurazioni-misura-riferimento";
         return call_user_func([$this->httpClass,"put"],$url,$data,"application/json",["Authorization: ".$this->authToken]);
+    }
+
+    public function putCausaliSospensione($data)
+    {
+        $url = $this->baseUrl . "/causali-sospensione";
+        return call_user_func([$this->httpClass, "put"], $url, $data, "application/json", ["Authorization: " . $this->authToken]);
+    }
+
+    public function putCausaliScarto($data)
+    {
+        $url = $this->baseUrl . "/causali-scarto";
+        return call_user_func([$this->httpClass, "put"], $url, $data, "application/json", ["Authorization: " . $this->authToken]);
     }
 
 
